@@ -51,7 +51,7 @@ function createObj (title,options,correctAnswerIndex){
         return answerIndex === ques.correctAnswerIndex;
     };
     ques.getCorrectAnswer = function() {
-        return options[ques.correctAnswerIndex];
+        return ques.options[ques.correctAnswerIndex];
     }
     return ques;
 }
@@ -86,7 +86,7 @@ function createObjThis (title,options,correctAnswerIndex){
         return answerIndex === this.correctAnswerIndex;
     };
     ques.getCorrectAnswer = function() {
-        return options[this.correctAnswerIndex];
+        return this.options[this.correctAnswerIndex];
     }
     return ques;
 }
