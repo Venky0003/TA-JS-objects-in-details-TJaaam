@@ -100,7 +100,7 @@ console.log(user2.nameContains("Lan"));
 console.groupEnd();
 
 let user3 = new User("John Snow");
-console.log(user3.fullName); // "John Doe"
+console.log(user3.fullName);
 
 user3.fullName = "Jon"
 console.log(user3);
