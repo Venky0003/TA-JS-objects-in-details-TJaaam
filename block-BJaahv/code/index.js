@@ -119,7 +119,7 @@ console.log(user4.decrementProject(2));
 console.log(user4.changeName("Lannister"));
 console.groupEnd();
 
-// using class
+// using class 
 
 class Users {
     constructor(name,id,noOfProjects = 0) {
