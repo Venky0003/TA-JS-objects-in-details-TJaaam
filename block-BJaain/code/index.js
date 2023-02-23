@@ -260,7 +260,7 @@ let obj2 = {
 };
 
 let getSecondData = obj2.printSecondData.bind(obj1);
-console.log(getSecondData()); // Output and why ??? 2 
+console.log(getSecondData()); // Output and why ??? 2 using bind on two objects
 
 // --------------
 
@@ -300,6 +300,6 @@ const call = {
   },
 };
 
-let newCall = call.anotherCaller;
+let newCall = call.anotherCaller; 
 
-newCall(); // output ?? undefined called, too!
+newCall(); // output ?? undefined called, too! 
