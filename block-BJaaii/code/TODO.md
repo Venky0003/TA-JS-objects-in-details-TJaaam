@@ -13,7 +13,7 @@ Queue
 Data:
 
 - `stack`
-
+   
 Methods:
 
 - `push`: will accept a value and add to the stack. Stack adds data at the end
@@ -28,6 +28,45 @@ Getter
 - `length`: returns the current length of the stack.
 
 #### Test
+
+```js
+class Stack {
+    constructor(){
+        this.items = [];
+    }
+    //push
+    push(elm){
+        return this.items.push(elm);
+    }
+    pop(){
+        return this.items.pop();
+    }
+    peek(index = this.items.length- 1){
+        if(this.isEmpty()){
+            return null;
+        }
+        else {
+            return this.items[index];
+        }
+    }
+    reverse(){
+        return this.items.reverse();
+    }
+    isEmpty(){
+        return this.items.length === 0;
+    }
+    displayStack(){
+        let stringStack = " ";
+        for(let i = 0; i < this.items.length; i++)
+            stingStack += this.items[i]+ " "; 
+        return stringStack;
+    }
+    get length() {
+    return this.items.length;
+  }
+    
+}
+```
 
 ```js
 let myStack = new Stack();
@@ -67,6 +106,41 @@ Getter
 #### Test
 
 ```js
+class Queue {
+    constructor(){
+        this.items = {};
+        this.frontIndex = 0;
+        this.backIndex = 0;
+    }
+    enqueue(item){
+        this.items[this.backIndex] = item;
+        this.backIndex++;
+        return item;
+    }
+    dequeue(){
+        let item = this.items[this.frontIndex]
+        delete this.items[this.frontIndex]
+        this.frontIndex++
+        return item;
+    }
+    peek(index = this.frontIndex){
+        return this.items[index];
+    }
+    isEmpty(){
+       return this.length === 0;
+    }
+    displayQueue(){
+        let stringQueue = " ";
+        for(let i = this.frontIndex; i < this.backIndex; i++){
+            stringQueue += this.items[i] + " ";
+        }
+        return stringQueue;
+    }
+    get length() {
+        return  this.backIndex - this.frontIndex;
+    }
+}
+
 let atmQueue = new Queue();
 atmQueue.enqueue('Aman');
 atmQueue.enqueue('John');
