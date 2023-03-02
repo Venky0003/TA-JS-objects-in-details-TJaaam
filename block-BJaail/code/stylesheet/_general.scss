@@ -1,0 +1,87 @@
+*,*::after,
+*::before{
+    box-sizing: border-box;
+}
+html {
+    font-size: 16px;
+}
+body{
+    line-height: 1.5;
+    font-size: 1rem;
+}
+a {
+    text-decoration: none;
+}
+.container {
+    width:1320px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+.heading-1{
+    text-align: center;
+    font-size: 2.8rem;
+    h1{
+        i {
+            color: $primaryColor;
+            margin-right: .5rem;
+        }
+        span {
+            color: $primaryColor;
+        }
+    }
+}
+.form-control{
+    display: grid;
+    label{
+        display: block;
+        margin: {
+            bottom: 0.2rem; 
+            left: 4rem;
+        }
+        font-size: 1.2rem;
+
+    }
+    input{
+        width: 90%;
+        height: 2.5rem;
+        margin: {
+            bottom: 1.25rem;
+            left: auto;
+            right: auto;
+        } 
+    }
+    #add-btn{
+        background-color: $primaryColor;
+        color: white;
+        border: none;
+    }
+}
+
+th {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+table{
+    width: 90%;
+    margin: 0 auto;
+    :hover {
+        cursor: pointer;
+    }
+}
+th{
+    text-align: start;
+    height: 3rem;
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
+.tr:nth-child(odd){
+    background-color: rgba(167, 167, 167, 0.656);
+}
+tr{
+    td{
+        width:20%;
+        height: 2.6rem;
+        vertical-align: middle;
+    }
+}
