@@ -1,0 +1,142 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*, *::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1320px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.heading-1 {
+  text-align: center;
+  font-size: 2.8rem;
+}
+.heading-1 h1 i {
+  color: rgb(9, 119, 183);
+  margin-right: 0.5rem;
+}
+.heading-1 h1 span {
+  color: rgb(9, 119, 183);
+}
+
+.form-control {
+  display: grid;
+}
+.form-control label {
+  display: block;
+  margin-bottom: 0.2rem;
+  margin-left: 4rem;
+  font-size: 1.2rem;
+}
+.form-control input {
+  width: 90%;
+  height: 2.5rem;
+  margin-bottom: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-control #add-btn {
+  background-color: rgb(9, 119, 183);
+  color: white;
+  border: none;
+}
+
+th {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;
+}
+table :hover {
+  cursor: pointer;
+}
+
+th {
+  text-align: start;
+  height: 3rem;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
+.tr:nth-child(odd) {
+  background-color: rgba(167, 167, 167, 0.656);
+}
+
+tr td {
+  width: 20%;
+  height: 2.6rem;
+  vertical-align: middle;
+}/*# sourceMappingURL=style.css.map */
