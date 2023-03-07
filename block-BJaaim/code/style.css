@@ -1,0 +1,18 @@
+.question-container {
+    margin-bottom: 20px;
+  }
+  
+  .options li {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .correct {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .incorrect {
+    color: red;
+    font-weight: bold;
+  }
