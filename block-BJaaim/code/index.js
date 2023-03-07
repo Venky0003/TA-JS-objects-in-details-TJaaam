@@ -1,186 +1,126 @@
+let form = document.querySelector('form');
+let prev = document.querySelector('.prev');
+let next = document.querySelector('.next');
+let quizElm = document.querySelector('.quiz');
+let totalQuestions =  document.querySelector('header p');
+let showResults =  document.querySelector('.show_result');
 
 class Question {
-  constructor(title, options = [], correctAnswer) {
+  constructor(title, options = [], correctAnswerIndex) {
     this.title = title;
     this.options = options;
-    this.correctAnswer = correctAnswer;
+    this.correctAnswerIndex = correctAnswerIndex;
   }
 
   isCorrect(answer) {
-    return this.correctAnswer === answer;
+    return this.options[this.correctAnswerIndex] === answer;
   }
-
-  createUI() {
-    let container = document.createElement("div");
-    container.classList.add("question-container");
-
-    let titleElm = document.createElement("h2");
-    titleElm.innerText = this.title;
-    container.appendChild(titleElm);
-
-    let optionsElm = document.createElement("ul");
-    optionsElm.classList.add("options");
-    this.options.forEach((opt) => {
-      let option = document.createElement("li");
-      option.textContent = opt;
-      option.addEventListener("click", () => {
-        if (this.isCorrect(opt)) {
-          option.classList.add("correct");
-        } else {
-          option.classList.add("incorrect");
-        }
-        optionsElm
-          .querySelectorAll("li")
-          .forEach((li) => li.removeEventListener("click"));
-        onAnswer(this.isCorrect(opt));
-      });
-      optionsElm.appendChild(option);
-    });
-    container.appendChild(optionsElm);
-    return container;
+  getCorrectAnswer() {
+    return this.options[this.correctAnswerIndex];
   }
 }
 
-//   class Quiz {
-//     constructor(allQuestions = []) {
-//       this.allQuestions = allQuestions;
-//       this.activeIndex = 0;
-//       this.score = 0;
-//       this.quizContainer = document.getElementById('quiz-container');
-//     }
-
-//     nextQuestion() {
-//       this.activeIndex++;
-//       if (this.activeIndex >= this.allQuestions.length) {
-//         this.updateScore();
-//       } else {
-//         this.createUI();
-//       }
-//     }
-//     createUI(){
-//         let currentQuestion = this.allQuestions[this.activeIndex];
-//         let container = document.createElement('div');
-//         container.classList.add('question-container');
-
-//         let titleElm = document.createElement('h2');
-//         titleElm.innerText = currentQuestion.title;
-//         container.appendChild(titleElm);
-
-//         let optionsElm = document.createElement('ul');
-//         optionsElm.classList.add('options');
-//         currentQuestion.options.forEach((opt, index)=>{
-//             let option = document.createElement('li');
-//             option.textContent = opt;
-//             option.addEventListener('click', ()=>{
-//                 if(currentQuestion.isCorrect(index)) {
-//                     option.classList.add('correct');
-//                 } else {
-//                     option.classList.add('incorrect');
-//                 }
-//                 optionsElm.querySelectorAll('li').forEach(li => li.removeEventListener('click'));
-//                 container.appendChild(nextButton);
-//             })
-//             optionsElm.appendChild(option);
-//         });
-//         container.appendChild(optionsElm);
-
-//         let nextButton = document.createElement('button');
-//         nextButton.textContent = 'Next';
-//         nextButton.addEventListener('click', ()=>{
-//             container.innerHTML = '';
-//             this.nextQuestion();
-//         });
-
-//         return container;
-//     }
-
-//     // createUI() {
-//     //   let currentQuestion = this.allQuestions[this.activeIndex];
-//     //   let questionUI = currentQuestion.createUI((isCorrect) => {
-//     //     if (isCorrect) {
-//     //       this.updateScore();
-//     //     }
-//     //     this.nextQuestion();
-//     //   });
-//     //   this.quizContainer.innerHTML = '';
-//     //   this.quizContainer.appendChild(questionUI);
-//     // }
-
-//     updateScore() {
-//       this.score++;
-//     }
-//   }
-
 class Quiz {
-  constructor(allQuestions = []) {
+  constructor(allQuestions = [], score = 0) {
     this.allQuestions = allQuestions;
+    this.score = score;
     this.activeIndex = 0;
-    this.score = 0;
+  }
+  incrementScore(){
+    this.score = this.score + 1;
+  }
+  addQuestion(title, options, answerIndex) {
+    let question = new Question(title, options, answerIndex);
+    this.allQuestions.push(question);
   }
   nextQuestion() {
-    this.activeIndex++;
-    if (this.activeIndex >= this.allQuestions.length) {
-      this.updateScore();
+    this.activeIndex = this.activeIndex + 1;
+    this.createUI();
+  }
+  prevQuestion(){
+    this.activeIndex = this.activeIndex - 1;
+    this.createUI();
+  }
+  handleButtons(){
+    if(this.activeIndex === 0){
+        prev.style.visibility = 'hidden';
+    } else if(this.activeIndex === this.allQuestions.length - 1){
+        next.style.visibility = 'hidden';
+        showResults.style.visibility = "visible"
     } else {
-      this.createUI();
+    prev.style.visibility = 'visible';
+    next.style.visibility = 'visible';
+    showResults.style.visibility = "hidden"
     }
   }
   createUI() {
-    let currentQuestion = this.allQuestions[this.activeIndex];
-    let container = document.createElement("div");
-    container.classList.add("question-container");
-
-    let titleElm = document.createElement("h2");
-    titleElm.innerText = currentQuestion.title;
-    container.appendChild(titleElm);
-
-    let optionsElm = document.createElement("ul");
+    quizElm.innerHTML = "";
+    let activeQuestion = this.allQuestions[this.activeIndex];
+    let form = document.createElement("form");
+    let fieldset = document.createElement("fieldset");
+    let legend = document.createElement("legend");
+    legend.innerText = activeQuestion.title;
+    let optionsElm = document.createElement("div");
     optionsElm.classList.add("options");
-    currentQuestion.options.forEach((opt, index) => {
-      let option = document.createElement("li");
-      option.textContent = opt;
-      option.addEventListener("click", () => {
-        if (currentQuestion.isCorrect(index)) {
-          option.classList.add("correct");
-        } else {
-          option.classList.add("incorrect");
-        }
-        optionsElm
-          .querySelectorAll("li")
-          .forEach((li) => li.removeEventListener("click"));
-        container.appendChild(nextButton);
-      });
-      optionsElm.appendChild(option);
-    });
-    container.appendChild(optionsElm);
+    let buttonWrapper = document.createElement("div");
+    let button = document.createElement("button");
+    button.type = "submit";
+    button.innerText = "Submit";
+    button.classList.add('submit')
+    buttonWrapper.append(button);
 
-    let nextButton = document.createElement("button");
-    nextButton.textContent = "Next";
-    nextButton.addEventListener("click", () => {
-      container.innerHTML = "";
-      this.nextQuestion();
-    });
+    activeQuestion.options.forEach((option,index)=>{
+        let input = document.createElement('input');
+        input.id = `option-${index}`;
+        input.type = 'radio';
+        input.name = 'options';
+        input.value = option;
 
-    return container;
+        let label =document.createElement('label');
+        label.for = `option-${index}`;
+        label.innerText = option;
+        
+        form.addEventListener('submit', (event) =>{
+            event.preventDefault();
+            if(input.checked) {
+                if(activeQuestion.isCorrect(input.value)) {
+                    this.incrementScore();
+                }
+            }
+        })
+
+        optionsElm.append(input, label);
+    })
+    this.handleButtons();
+    totalQuestions.innerText = `Total Questions: ${this.allQuestions.length}`
+    fieldset.append(legend, optionsElm, buttonWrapper);
+    form.append(fieldset);
+    quizElm.append(form)
   }
 }
 
-const question1 = new Question(
-  "What is the capital of France?",
-  ["Paris", "London", "Madrid", "Berlin"],
-  "Paris"
-);
-const question2 = new Question(
-  "What is the largest country in the world?",
-  ["China", "Russia", "USA", "Canada"],
-  "Russia"
-);
-const question3 = new Question(
-  "What is the smallest planet in our solar system?",
-  ["Venus", "Mars", "Mercury", "Neptune"],
-  "Mercury"
-);
+function init(){
+    let quiz = new Quiz();
+quizCollection.forEach((question) => {
+  quiz.addQuestion(
+    question.title,
+    question.options, 
+    question.answerIndex
+    );
+});
 
-const allQuestions = [question1, question2, question3];
-const quiz = new Quiz(allQuestions);
 quiz.createUI();
+
+next.addEventListener(
+    'click', quiz.nextQuestion.bind(quiz));
+
+prev.addEventListener(
+    'click', quiz.prevQuestion.bind(quiz));
+
+showResults.addEventListener('click', () => {
+    alert(`Your score is ${quiz.score}`)
+});
+
+}
+
+init();
